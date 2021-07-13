@@ -267,7 +267,7 @@ class WiFiForIoTPlugin {
     if (!Platform.isIOS && !await isEnabled()) await setEnabled(true);
     bool? bResult;
     try {
-      return await _channel.invokeMethod('connect', {
+      return (await _channel.invokeMethod('connect', {
         "ssid": ssid.toString(),
         "password": password.toString(),
         "join_once": joinOnce,
@@ -275,7 +275,7 @@ class WiFiForIoTPlugin {
         "is_hidden": isHidden,
         "security":
             security.toString().substring('$NetworkSecurity'.length + 1),
-      }).toString();
+      })).toString();
     } on MissingPluginException catch (e) {
       print("MissingPluginException : ${e.toString()}");
       return e.toString();
