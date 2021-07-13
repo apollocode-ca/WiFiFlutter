@@ -142,13 +142,13 @@ public class SwiftWifiIotPlugin: NSObject, FlutterPlugin {
                         result(true)
                     } else {
                         print("Not Connected")
-                        result(false)
+                        result(error?.localizedDescription)
                     }
                     return
                 } else {
                     guard let this = self else {
                         print("WiFi network not found")
-                        result(false)
+                        result("WiFi network not found")
                         return
                     }
                     if let ssid = this.getSSID() {
@@ -157,7 +157,7 @@ public class SwiftWifiIotPlugin: NSObject, FlutterPlugin {
                         result(ssid == sSSID)
                     } else {
                         print("WiFi network not found")
-                        result(false)
+                        result("WiFi network not found")
                     }
                     return
                 }
