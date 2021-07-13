@@ -256,7 +256,7 @@ class WiFiForIoTPlugin {
     }
   }
 
-  static Future<bool> connect(
+  static Future<String> connect(
     String ssid, {
     String? password,
     NetworkSecurity security = NetworkSecurity.NONE,
@@ -267,7 +267,7 @@ class WiFiForIoTPlugin {
     if (!Platform.isIOS && !await isEnabled()) await setEnabled(true);
     bool? bResult;
     try {
-      bResult = await _channel.invokeMethod('connect', {
+      return await _channel.invokeMethod('connect', {
         "ssid": ssid.toString(),
         "password": password.toString(),
         "join_once": joinOnce,
@@ -278,8 +278,9 @@ class WiFiForIoTPlugin {
       });
     } on MissingPluginException catch (e) {
       print("MissingPluginException : ${e.toString()}");
+      return e.toString();
     }
-    return bResult != null && bResult;
+    // return bResult != null && bResult;
   }
 
   static Future<bool> registerWifiNetwork(
