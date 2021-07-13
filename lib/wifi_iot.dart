@@ -275,7 +275,7 @@ class WiFiForIoTPlugin {
         "is_hidden": isHidden,
         "security":
             security.toString().substring('$NetworkSecurity'.length + 1),
-      });
+      }).toString();
     } on MissingPluginException catch (e) {
       print("MissingPluginException : ${e.toString()}");
       return e.toString();
